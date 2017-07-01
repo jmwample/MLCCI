@@ -1,0 +1,4 @@
+/crypto_curr/config.py*
+/twitter/config.py*
+/NLP-Sentiment-Analysis-Twitter
+.gitignore

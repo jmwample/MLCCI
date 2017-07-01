@@ -1,0 +1,6 @@
+Streaming API - python pusher 
+    see docs at https://github.com/pusher/pusher-http-python
+    This will require registration of an app at https://app.pusher.com/
+
+or use the json format for getting sub info
+    https://www.reddit.com/r/bitcoin/new.json?sort=new
