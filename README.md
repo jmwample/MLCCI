@@ -20,13 +20,13 @@ and a different draw. In the future it might stretch to inclclude other sources
 including other financial markets and news / economics outlets. Parsing is the time
 intensive part. 
 
-1. [Twitter] (https://ww.twitter.com)
-.. * [Tweepy - Twitter API](https://github.com/tweepy/tweepy)
+1. [Twitter](https://ww.twitter.com)
+    * [Tweepy - Twitter API](https://github.com/tweepy/tweepy)
 2. [Reddit]( https://www.reddit.com) 
-.. * [Streaming API - python pusher](https://github.com/pusher/pusher-http-python)
-... - [Require registration of App]( https://app.pusher.com/)
-.. * [Json Page Info](https://www.reddit.com/r/bitcoin/new.json?sort=new)
-... -  Json format for getting sub info and posts
+    * [Streaming API - python pusher](https://github.com/pusher/pusher-http-python)
+        - [Require registration of App]( https://app.pusher.com/)
+	* [Json Page Info](https://www.reddit.com/r/bitcoin/new.json?sort=new)
+		-  Json format for getting sub info and posts
 4. [Google News](https://newsapi.org/google-news-api)
 3. Others?
 
@@ -41,10 +41,10 @@ See [this article explaining the difference](https://medium.com/intuitionmachine
 
 
 1. Sub-Symbolic
-.. * [Gensim - Word to Vector](https://rare-technologies.com/word2vec-tutorial/)
-2. Symbolic
-.. * [NLTK - Natural Language Tool Kit](http://www.nltk.org/)
-.. * [IBM Watson - SA Plugin](https://www.twilio.com/blog/2016/07/sms-sentiment-analysis-in-python-with-flask-and-the-ibm-watson-twilio-add-on.html)
+	* [Gensim - Word to Vector](https://rare-technologies.com/word2vec-tutorial/)
+2. Symbolic	
+	* [NLTK - Natural Language Tool Kit](http://www.nltk.org/)
+	* [IBM Watson - SA Plugin](https://www.twilio.com/blog/2016/07/sms-sentiment-analysis-in-python-with-flask-and-the-ibm-watson-twilio-add-on.html)
 
 ---
 
@@ -65,10 +65,10 @@ model for analysis scoring against the market performance.
 ### Links 
 
 * [Coinbase](https://www.coinbase.com)
-.. - [API](https://developers.coinbase.com/docs/wallet/guides/buy-sell)
-.. - [GDAX API](https://docs.gdax.com/?python#introduction)
-.. - [GDAX Exchange](https://www.gdax.com/trade/BTC-USD)
-.. - [Account](https://www.coinbase.com/signin)
+	- [API](https://developers.coinbase.com/docs/wallet/guides/buy-sell)
+	- [GDAX API](https://docs.gdax.com/?python#introduction)
+	- [GDAX Exchange](https://www.gdax.com/trade/BTC-USD)
+	- [Account](https://www.coinbase.com/signin)
 * [Ethereum](https://www.ethereum.org/)
 * [R/CryptoMarkets](https://www.reddit.com/r/CryptoMarkets/)
 * [R/CryptoCurrencyLive](https://www.reddit.com/r/CryptoCurrencyLive/)
