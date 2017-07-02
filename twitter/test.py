@@ -3,9 +3,11 @@
 
 """
 import config as cfg
+from collections import deque
 import io
 import json
 import re
+import sys
 from textblob import TextBlob
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
@@ -21,12 +23,37 @@ consumer_secret = cfg.api['api_consumer_secret']
 
 
 #This is a basic listener that just prints received tweets to stdout.
-class StdOutListener(StreamListener):
+class myStdOutListener(StreamListener):
+
+
+    def __init__(self):
+        StreamListener.__init__(self)
+        self.tweets_1k = deque([])
+        self.tweets_10k = deque([])
+
+
+    def push_tweet(self, tweet):
+        self.check_lengths()
+        sys.stdout.write(".")
+        sys.stdout.flush()
+        self.tweets_1k.append(tweet)
+        self.tweets_10k.append(tweet)
+
+
+    def check_lengths(self):
+        if len(self.tweets_1k) >= 1000:
+            sys.stdout.write("/")
+            sys.stdout.flush()
+            self.tweets_1k.popleft()
+        if len(self.tweets_10k) >= 10000:
+            sys.stdout.write("|")
+            sys.stdout.flush()
+            self.tweets_10k.popleft()
 
 
     def on_status(self, status):
-        #if status.retweeted_status:
-        #    return
+        if status.retweeted:
+            return
         description = status.user.description
         loc = status.user.location
         text = status.text
@@ -39,13 +66,19 @@ class StdOutListener(StreamListener):
         retweets = status.retweet_count
         bg_color = status.user.profile_background_color
 
-        print(text)
+        #print(text)
 
         blob = TextBlob(text)
         sentiment = blob.sentiment 
 
-        print (sentiment.polarity, sentiment.subjectivity)
-    
+        #print (sentiment.polarity, sentiment.subjectivity)
+
+        tweet ={"text":text,"loc":loc,
+                "subj":sentiment.subjectivity,
+                "pol":sentiment.polarity
+        } 
+
+        self.push_tweet(tweet)
 
     """def on_data(self, data):
         #print data
@@ -71,7 +104,7 @@ class StdOutListener(StreamListener):
 if __name__ == '__main__':
 
     #This handles Twitter authetification and the connection to Twitter Streaming API
-    l = StdOutListener()
+    l = myStdOutListener()
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     stream = Stream(auth, l)
