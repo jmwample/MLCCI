@@ -2,3 +2,5 @@
 /twitter/config.py*
 /NLP-Sentiment-Analysis-Twitter
 .gitignore
+*.swp
+*.swo
