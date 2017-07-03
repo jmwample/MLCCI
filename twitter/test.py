@@ -4,8 +4,8 @@
 """
 import config as cfg
 from collections import deque
-import io
 import json
+from matplotlib import pyplot as plt
 import re
 import sys
 from textblob import TextBlob
@@ -28,26 +28,36 @@ class myStdOutListener(StreamListener):
 
     def __init__(self):
         StreamListener.__init__(self)
-        self.tweets_1k = deque([])
-        self.tweets_10k = deque([])
+        self.tweets_1k = deque([{"pol":0}]*10)
+        self.tweets_10k = deque([{"pol":0}]*100)
+        #self.plot_sentiment()
+        l = len(self.tweets_1k)
+        self.X = range(0,l)
+        self.Y = [ self.tweets_1k[x]["pol"] for x in self.X ]
+
+        plt.ion()
+        self.graph = plt.plot(self.X,self.Y)[0]
+
 
 
     def push_tweet(self, tweet):
         self.check_lengths()
-        sys.stdout.write(".")
-        sys.stdout.flush()
+        # sys.stdout.write(".")
+        # sys.stdout.flush()
         self.tweets_1k.append(tweet)
         self.tweets_10k.append(tweet)
+        self.Y = [ self.tweets_1k[x]["pol"] for x in self.X ]
+        self.graph.set_ydata(self.Y)
+        plt.ylim((-1.5,1.5))
+        plt.draw()
+        plt.pause(1)
+        return True
 
 
     def check_lengths(self):
-        if len(self.tweets_1k) >= 1000:
-            sys.stdout.write("/")
-            sys.stdout.flush()
+        if len(self.tweets_1k) >= 10:
             self.tweets_1k.popleft()
-        if len(self.tweets_10k) >= 10000:
-            sys.stdout.write("|")
-            sys.stdout.flush()
+        if len(self.tweets_10k) >= 100:
             self.tweets_10k.popleft()
 
 
@@ -72,23 +82,14 @@ class myStdOutListener(StreamListener):
         sentiment = blob.sentiment 
 
         #print (sentiment.polarity, sentiment.subjectivity)
-
         tweet ={"text":text,"loc":loc,
                 "subj":sentiment.subjectivity,
                 "pol":sentiment.polarity
         } 
+        # print tweet["pol"]
 
         self.push_tweet(tweet)
 
-    """def on_data(self, data):
-        #print data
-        try:
-            tweet = json.loads(data)
-            print(tweet['text'], [ x['text'] for x in tweet['entities']['hashtags'] ])
-        except:
-            return False
-        return True
-        """
 
     def on_error(self, status_code):
         if status_code == 420:
@@ -111,12 +112,13 @@ if __name__ == '__main__':
                                                                     
     #This line filter Twitter Streams to capture data by keywords relevant to cryptocurrencies
     stream.filter(track=['bitcoin', 'ethereum', 'btc-usd'])
+    l.plot_sentiment()
 
 
 
 
 """
-mport io
+import io
 
 output = io.StringIO()
 output.write('First line.\n')
