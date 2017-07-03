@@ -73,3 +73,16 @@ model for analysis scoring against the market performance.
 * [R/CryptoMarkets](https://www.reddit.com/r/CryptoMarkets/)
 * [R/CryptoCurrencyLive](https://www.reddit.com/r/CryptoCurrencyLive/)
 * [Books on BlockChain ](http://cryptoczars.com/top-5-books-blockchain-developers/)
+
+
+---
+
+### Running
+
+Currently there are only test scripts implemented. 
+To run the twitter stream getting the tweets pertaining to "bitcoin", "ethereum", and "btc-usd"
+
+```
+$ python twitter/test.py
+
+```
